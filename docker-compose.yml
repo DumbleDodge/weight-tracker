@@ -1,0 +1,14 @@
+version: '3'
+services:
+  weight-tracker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # Pasamos las variables de entorno al proceso de build
+        VITE_SUPABASE_URL: ${VITE_SUPABASE_URL}
+        VITE_SUPABASE_KEY: ${VITE_SUPABASE_KEY}
+    container_name: weight-tracker
+    restart: unless-stopped
+    ports:
+      - "8080:80" # La app estará disponible en el puerto 8080 de tu servidor
