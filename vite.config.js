@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
-  base: '/',  // <--- ASEGÚRATE DE QUE ESTA LÍNEA ESTÁ ASÍ (o prueba './' si falla)
+  base: './', // <--- IMPORTANTE: Punto y barra
   plugins: [
     react(),
     VitePWA({
