@@ -1,16 +1,24 @@
-<head>
+<!doctype html>
+<html lang="en">
+  <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     
-    <!-- Evita que el usuario haga zoom pellizcando (sensación nativa) -->
+    <!-- Configuración para móvil (ya la tenías) -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    
-    <!-- Título de la App -->
-    <title>Weight Tracker</title>
-    
-    <!-- Configuración PWA para iOS -->
     <meta name="theme-color" content="#0f172a">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Tracker">
-</head>
+    
+    <title>Weight Tracker</title>
+  </head>
+  <body>
+    <!-- Aquí es donde React pinta tu App -->
+    <div id="root"></div>
+    
+    <!-- 👇👇👇 PEGA ESTA LÍNEA AQUÍ 👇👇👇 -->
+    <script type="module" src="/src/main.jsx"></script>
+    
+  </body>
+</html>
