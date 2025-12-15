@@ -1,24 +1,46 @@
 /* src/App.css */
 :root {
-  --bg-color: #0f172a;       /* Slate 900 */
-  --card-bg: rgba(255, 255, 255, 0.05);
-  --border-color: rgba(255, 255, 255, 0.1);
-  --accent-color: #8b5cf6;   /* Violeta */
-  --text-primary: #ffffff;
-  --text-secondary: #94a3b8; /* Slate 400 */
+  /* --- TEMA CLARO (Default) --- */
+  --bg-app: #f8fafc;          /* Slate 50 */
+  --bg-card: #ffffff;         /* White */
+  --text-main: #0f172a;       /* Slate 900 */
+  --text-muted: #64748b;      /* Slate 500 */
+  --border-color: #e2e8f0;    /* Slate 200 */
+  --primary: #8b5cf6; /* Violeta base */
+  --primary-light: #e0e7ff;   /* Indigo 100 */
+  --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  
+  --chart-grid: #e2e8f0;
+  --chart-text: #94a3b8;
 }
 
+/* --- TEMA OSCURO --- */
+[data-theme='dark'] {
+  --bg-app: #0f172a;          /* Slate 900 */
+  --bg-card: #1e293b;         /* Slate 800 */
+  --text-main: #f8fafc;       /* Slate 50 */
+  --text-muted: #94a3b8;      /* Slate 400 */
+  --border-color: #334155;    /* Slate 700 */
+  --primary: #818cf8;         /* Indigo 400 */
+  --primary-light: rgba(99, 102, 241, 0.2);
+  --shadow-card: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+  
+  --chart-grid: #334155;
+  --chart-text: #64748b;
+}
+
+/* RESET & BASE */
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--bg-color);
-  color: var(--text-primary);
-  font-family: 'Inter', system-ui, sans-serif;
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   -webkit-tap-highlight-color: transparent;
-  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* --- Layout Principal --- */
+/* LAYOUT */
 .app-container {
   min-height: 100vh;
   position: relative;
@@ -26,265 +48,277 @@ body {
 }
 
 .main-content {
-  width: 100%;
-  max-width: 100%;
-  padding: 8px; /* Padding reducido para tarjetas anchas */
-  box-sizing: border-box;
-  margin: 0;
-}
-
-/* --- Componentes Glassmorphism --- */
-.glass-card {
-  width: 100%;
-  background: var(--card-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--border-color);
-  border-radius: 20px;
-  padding: 0;
-  margin-bottom: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  display: block; /* Importante para Recharts */
-  box-sizing: border-box;
-}
-
-.card-content {
+  max-width: 600px; /* Un poco más ancho para tablets */
+  margin: 0 auto;
   padding: 20px;
-  padding-bottom: 5px;
-}
-
-/* --- Inputs --- */
-.glass-input {
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid var(--border-color);
-  color: white;
-  font-size: 3rem;
-  font-weight: bold;
-  text-align: center;
-  border-radius: 16px;
-  padding: 20px;
-  width: 100%;
   box-sizing: border-box;
-  outline: none;
-  transition: border-color 0.3s;
 }
 
-.glass-date {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-color);
-  color: var(--text-secondary);
-  font-family: inherit;
-  font-size: 1rem;
-  padding: 10px 16px;
-  border-radius: 12px;
-  outline: none;
-  width: 100%;
-  margin-bottom: 20px;
-  text-align: center;
-  color-scheme: dark; 
-}
-
-.glass-input:focus, .glass-date:focus {
-  border-color: var(--accent-color);
-}
-
-/* --- Tabla de Datos --- */
-.glass-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-  font-size: 0.9rem;
-}
-
-.glass-table th {
-  text-align: center;
-  color: var(--text-secondary);
-  font-weight: normal;
-  font-size: 0.75rem;
-  padding-bottom: 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.glass-table th:first-child {
-  padding-left: 20px;
-  text-align: left; 
-}
-
-.glass-table td {
-  padding: 16px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  color: white;
-  vertical-align: middle;
-  text-align: center;
-}
-
-.sub-row {
-  background: rgba(0, 0, 0, 0.2);
-}
-
-.sub-row td {
-  padding: 8px 0;
-  border-bottom: none;
-  font-size: 0.8rem;
-  color: #94a3b8;
-  text-align: center;
-}
-
-.expand-icon {
-  transition: transform 0.2s ease;
-  color: var(--accent-color);
-  margin-right: 8px;
-  vertical-align: middle;
-}
-
-.rotated {
-  transform: rotate(90deg);
-}
-
-.row-trigger {
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.row-trigger:hover {
-  background: rgba(255, 255, 255, 0.03);
-}
-
-.text-green { color: #4ade80; font-weight: bold; }
-.text-red { color: #f87171; font-weight: bold; }
-.text-neutral { color: var(--text-secondary); }
-
-/* --- Botones --- */
-.btn-primary {
-  background-color: var(--accent-color);
-  color: white;
-  font-weight: bold;
-  font-size: 1.1rem;
-  padding: 16px;
-  border-radius: 16px;
-  width: 100%;
-  border: none;
-  cursor: pointer;
+/* HEADER & TITLES */
+.header-row {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 20px;
+  margin-bottom: 24px;
+  margin-top: 10px;
 }
 
-/* --- Textos --- */
-.title-gradient {
-  background: linear-gradient(to right, #a78bfa, #e879f9);
+.title-main {
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  margin: 0;
+  background: linear-gradient(135deg, var(--text-main) 0%, var(--text-muted) 100%);
   -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  font-size: 2rem;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 5px;
+  -webkit-text-fill-color: transparent;
 }
 
 .subtitle {
-  text-align: center;
-  color: var(--text-secondary);
-  margin-bottom: 30px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  font-size: 0.95rem;
 }
 
-.stat-label { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 5px; }
-.stat-value { font-size: 2rem; font-weight: bold; margin: 0; }
-
-.badge {
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-.badge-up { background: rgba(239, 68, 68, 0.2); color: #f87171; }
-.badge-down { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
-.badge-neutral { background: rgba(148, 163, 184, 0.2); color: #94a3b8; }
-
-/* --- Menú Flotante --- */
-.floating-menu {
-  position: fixed;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(30, 41, 59, 0.9);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 100px;
-  padding: 12px 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 40px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes slideUp {
-  from { transform: translate(-50%, 100px); opacity: 0; }
-  to { transform: translate(-50%, 0); opacity: 1; }
-}
-
-.nav-btn {
-  background: none;
-  border: none;
-  color: var(--text-secondary);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s;
+/* CARDS (Clean Style) */
+.clean-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 24px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s;
+  overflow: hidden;
   position: relative;
 }
 
-.nav-btn.active {
-  color: var(--accent-color);
-  transform: scale(1.1);
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
 }
 
-.nav-btn.active::after {
-  content: '';
-  position: absolute;
-  bottom: -6px;
-  width: 4px;
-  height: 4px;
-  background-color: var(--accent-color);
-  border-radius: 50%;
-  box-shadow: 0 0 10px var(--accent-color);
-}
-
-.flex-between { display: flex; justify-content: space-between; align-items: flex-start; }
-.animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-/* --- Grid para Inputs --- */
-.input-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* Dos columnas iguales */
-  gap: 16px;
-  width: 100%;
-  margin-top: 16px;
-}
-
-/* Etiquetas pequeñas encima de los inputs */
-.input-label {
+.stat-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  margin-bottom: 8px;
-  font-weight: 500;
 }
 
-/* Colores específicos para métricas */
-.color-sleep { color: #6366f1; } /* Indigo */
-.color-steps { color: #10b981; } /* Emerald */
+.stat-value {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.1;
+}
+
+.stat-unit {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-left: 4px;
+}
+
+/* INPUTS (Modern Forms) */
+.input-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.clean-input {
+  width: 100%;
+  background: var(--bg-app);
+  border: 2px solid transparent;
+  border-radius: 16px;
+  padding: 16px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+  text-align: center;
+  outline: none;
+  transition: all 0.2s;
+  box-sizing: border-box;
+}
+
+.clean-input:focus {
+  background: var(--bg-card);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--primary-light);
+}
+
+.clean-input::placeholder {
+  color: var(--border-color);
+}
+
+/* BUTTONS */
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 16px;
+  padding: 16px;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.2s, transform 0.1s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+  filter: brightness(0.9);
+}
+
+.btn-icon {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-icon:active {
+  background: var(--bg-app);
+  transform: scale(0.95);
+}
+
+/* DATE PICKER */
+.date-selector {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-family: inherit;
+  font-weight: 500;
+  outline: none;
+  box-shadow: var(--shadow-card);
+}
+
+/* TABLE */
+.clean-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.9rem;
+}
+
+.clean-table th {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 12px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.clean-table td {
+  padding: 16px 12px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-main);
+  text-align: center;
+}
+
+.row-trigger:hover {
+  background-color: var(--bg-app);
+}
+
+/* src/App.css */
+
+/* ... resto del css ... */
+
+/* --- Menú Flotante (Solo Iconos) --- */
+.nav-island {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  
+  /* Píldora compacta */
+  border-radius: 100px; 
+  padding: 6px 10px; /* Padding ajustado para abrazar los iconos */
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px; /* Separación entre botones */
+  
+  z-index: 1000;
+  animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.nav-item {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Quitamos min-width porque ya no hay texto */
+}
+
+/* El contenedor del icono (el botón en sí) */
+.nav-icon-box {
+  width: 44px; /* Un buen tamaño para el dedo */
+  height: 44px;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  border-radius: 50%; /* Totalmente redondo queda mejor sin texto */
+  color: var(--text-muted);
+  
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* --- ESTADOS ACTIVOS --- */
+
+/* Cuando está activo: Fondo de color y el icono cambia */
+.nav-item.active .nav-icon-box {
+  background-color: var(--primary);
+  color: #ffffff;
+  transform: scale(1.1); /* Un poco más grande */
+  
+  /* EL EFECTO BRILLANTE (GLOW) */
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.6); 
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Hover en escritorio */
+.nav-item:hover .nav-icon-box {
+  background-color: var(--bg-app);
+}
+/* UTILS */
+.text-green { color: #10b981; font-weight: 700; }
+.text-red { color: #ef4444; font-weight: 700; }
+.text-neutral { color: var(--text-muted); }
+.animate-fade-in { animation: fadeIn 0.4s ease-out; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
