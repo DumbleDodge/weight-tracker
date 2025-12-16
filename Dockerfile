@@ -13,11 +13,11 @@ COPY . .
 # --- CAMBIO: RESTAURAMOS ARGUMENTOS DINÁMICOS ---
 # Definimos que esperamos recibir estos argumentos
 ARG VITE_SUPABASE_URL
-ARG VITE_SUPABASE_KEY
+ARG VITE_SUPABASE_ANON_KEY
 
 # Los convertimos en variables de entorno para que Vite los vea al construir
 ENV VITE_SUPABASE_URL=$VITE_SUPABASE_URL
-ENV VITE_SUPABASE_KEY=$VITE_SUPABASE_ANON_KEY
+ENV VITE_SUPABASE_ANON_KEY=$VITE_SUPABASE_ANON_KEY
 # -----------------------------------------------
 
 # Construimos la app (Ahora Vite leerá las variables de arriba)
