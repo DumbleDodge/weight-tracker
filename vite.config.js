@@ -1,11 +1,12 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
-
+import tailwindcss from '@tailwindcss/vite' // <--- IMPORTANTE
 export default defineConfig({
     base: '/',  // <--- Vuelve a poner la barra sola
   plugins: [
     react(),
+    tailwindcss(), // <--- AÑADIR ESTO
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],

@@ -1,28 +1,56 @@
-/* src/index.css - RESET TOTAL */
+@import "tailwindcss";
 
+/* 1. Definimos las variables de color CSS nativas */
 :root {
-  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  /* --- MODO CLARO (Por defecto) --- */
+  --bg-app: #f1f5f9;          /* Slate 100 */
+  --bg-card: #ffffff;         /* Blanco */
+  --bg-input: #f8fafc;        /* Slate 50 */
+  --border-color: #e2e8f0;    /* Slate 200 */
+  --text-main: #0f172a;       /* Slate 900 */
   
-  color-scheme: dark; /* Ayuda a los inputs nativos */
-  background-color: #0f172a;
+  --primary: #8b5cf6;         /* Violet-500 */
+  --primary-dark: #7c3aed;    /* Violet-600 */
 }
 
+/* 2. Sobrescribimos las variables cuando existe la clase .dark */
+.dark {
+  /* --- MODO OSCURO --- */
+  --bg-app: #0f172a;          /* Slate 900 */
+  --bg-card: #1e293b;         /* Slate 800 */
+  --bg-input: #020617;        /* Slate 950 */
+  --border-color: #334155;    /* Slate 700 */
+  --text-main: #f8fafc;       /* Slate 50 */
+  
+  --primary: #a78bfa;         /* Violet-400 (Más claro para contraste) */
+  --primary-dark: #8b5cf6;    /* Violet-500 */
+}
+
+/* 3. Conectamos Tailwind v4 a nuestras variables */
+@theme {
+  /* Fondo principal */
+  --color-background: var(--bg-app);
+  
+  /* Tarjetas y superficies */
+  --color-surface: var(--bg-card);
+  
+  /* Inputs */
+  --color-input: var(--bg-input);
+  
+  /* Bordes */
+  --color-border: var(--border-color);
+  
+  /* Color Primario */
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+}
+
+/* 4. Estilos Base */
 body {
-  margin: 0;
-  padding: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  width: 100%;
-  overflow-x: hidden;
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* AQUÍ ESTÁ LA CLAVE: Vite limita el #root, nosotros lo liberamos */
-#root {
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
-  text-align: left; /* Vite a veces lo pone center */
-}
+/* Configuración para habilitar dark mode por clase en v4 */
+@variant dark (&:where(.dark, .dark *));
